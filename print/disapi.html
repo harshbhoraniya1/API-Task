@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table id="dis"></table>
+    <div id="btns"></div>
+    <script>
+        let pagesize = 10;
+        fetch("https://6602b0619d7276a75553f3d5.mockapi.io/user").then(y => y.json()).then(y => {
+            console.log(y)
+            dis(y,0,pagesize);
+            button(y);
+        })
+        function dis(data,s,e) {
+            const x = data.slice(s,e).map((v) => {
+                return `<tr><td>${v.id}</td><td>${v.firstName}</td><td>${v.lastName}</td><td>${v.e_mail}</td></tr>`
+            })
+            document.getElementById("dis").innerHTML = x.join("")
+        }
+        function button(d) {
+            let pages = Math.ceil(d.length / pagesize);
+            console.log(d)
+            for (let i = 1; i <= pages; i++) {
+                let s = (i - 1) * pagesize;
+                let e = s + pagesize;
+                document.getElementById("btns").innerHTML += `<button type="button" class="filter-btn" data-id="all"  onclick="dis(d,${s},${e})">${i}</button>`
+            }
+        }
+    </script>
+</body>
+
+</html>

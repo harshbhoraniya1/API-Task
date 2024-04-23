@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label for="firstName">firstName</label>
+        <input type="text" id="firstName" placeholder="Enter your firstName">
+    </div>
+    <div>
+        <label for="lastName">lastName</label>
+        <input type="text" id="lastName" placeholder="Enter your lastName">
+    </div>
+    <div>
+        <label for="email">email</label>
+        <input type="text" id="email" placeholder="Enter your email">
+    </div>
+    <div>
+        <button onclick="edit()">Registratone</button>
+    </div>
+    <script>
+        function edit() {
+            let obj = {
+                "createdAt": "2024-03-26T00:32:14.467Z",
+                "firstName": document.getElementById("firstName").value,
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/321.jpg",
+                "lastName": document.getElementById("lastName").value,
+                "e_mail": document.getElementById("email").value,
+                "id": "1"
+            }
+            fetch("https://6602b0619d7276a75553f3d5.mockapi.io/user",{
+                method: "POST",
+                body: JSON.stringify(obj),
+                headers: {
+                    'Content-Type': "application/json"
+                }
+            }).then(y=>y.json()).then(y=>{
+                console.log(y)
+            })
+        }
+    </script>
+</body>
+
+</html>
